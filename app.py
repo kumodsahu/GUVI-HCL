@@ -1,4 +1,34 @@
-import streamlit as     submitted = st.form_submit_button("Add Student")
+import streamlit as st
+
+# Grade calculator
+def calculate_grade(avg):
+    if avg >= 90:
+        return 'A+'
+    elif avg >= 80:
+        return 'A'
+    elif avg >= 70:
+        return 'B'
+    elif avg >= 60:
+        return 'C'
+    elif avg >= 50:
+        return 'D'
+    else:
+        return 'F'
+
+# App title
+st.title("🎓 Student Marks & Grade Summary")
+
+# Session state to store student data
+if 'students' not in st.session_state:
+    st.session_state.students = []
+
+# Input form
+with st.form("student_form"):
+    name = st.text_input("Student Name")
+    mark1 = st.number_input("Subject 1 Marks", min_value=0.0, max_value=100.0)
+    mark2 = st.number_input("Subject 2 Marks", min_value=0.0, max_value=100.0)
+    mark3 = st.number_input("Subject 3 Marks", min_value=0.0, max_value=100.0)
+    submitted = st.form_submit_button("Add Student")
 
     if submitted and name:
         total = mark1 + mark2 + mark3
@@ -36,33 +66,3 @@ if st.session_state.students:
 if st.button("🗑️ Clear All Data"):
     st.session_state.students = []
     st.success("All student data cleared!")
-st
-
-# Grade calculator
-def calculate_grade(avg):
-    if avg >= 90:
-        return 'A+'
-    elif avg >= 80:
-        return 'A'
-    elif avg >= 70:
-        return 'B'
-    elif avg >= 60:
-        return 'C'
-    elif avg >= 50:
-        return 'D'
-    else:
-        return 'F'
-
-# App title
-st.title("🎓 Student Marks & Grade Summary")
-
-# Session state to store student data
-if 'students' not in st.session_state:
-    st.session_state.students = []
-
-# Input form
-with st.form("student_form"):
-    name = st.text_input("Student Name")
-    mark1 = st.number_input("Subject 1 Marks", min_value=0.0, max_value=100.0)
-    mark2 = st.number_input("Subject 2 Marks", min_value=0.0, max_value=100.0)
-    mark3 = st.number_input("Subject 3 Marks", min_value=0.0, max_value=100.0)
